@@ -97,4 +97,8 @@ class GameFragment : Fragment() {
         super.onResume()
         analyticsReportScreen("Game")
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+    }
 }

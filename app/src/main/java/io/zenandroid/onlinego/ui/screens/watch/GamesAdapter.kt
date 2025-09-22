@@ -27,8 +27,8 @@ class GamesAdapter(var games: List<OGSGame>, private val clickListener: (OGSGame
             binding.gameName.text = game.name ?: "Unnamed Game"
             val blackPlayer = game.black?.username ?: "Unknown"
             val whitePlayer = game.white?.username ?: "Unknown"
-            val blackRank = Util.formatRank(Util.egfToRank(game.black?.rank?.toDouble()), 0.0)
-            val whiteRank = Util.formatRank(Util.egfToRank(game.white?.rank?.toDouble()), 0.0)
+            val blackRank = Util.formatRank(Util.egfToRank(game.black?.rank?.toDouble()), game.black?.ratings?.overall?.deviation ?: 0.0)
+            val whiteRank = Util.formatRank(Util.egfToRank(game.white?.rank?.toDouble()), game.white?.ratings?.overall?.deviation ?: 0.0)
             binding.gamePlayers.text = "$blackPlayer [$blackRank] vs $whitePlayer [$whiteRank]"
             binding.root.setOnClickListener { clickListener(game) }
         }

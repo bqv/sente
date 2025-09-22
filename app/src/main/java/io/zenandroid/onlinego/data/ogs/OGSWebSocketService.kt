@@ -350,7 +350,7 @@ class OGSWebSocketService(
                 "list" - "live"
                 "sort_by" - "rank"
                 "from" - 0
-                "limit" - 9
+                "limit" - 100
             }, Ack {
                 args -> emitter.onSuccess(adapter(args[0].toString())!!)
             })

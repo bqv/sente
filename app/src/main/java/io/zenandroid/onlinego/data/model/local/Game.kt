@@ -90,28 +90,28 @@ data class Game(
 
     companion object {
         fun fromOGSGame(game: OGSGame): Game {
-            val whiteRating = ((((game.white as? Map<*, *>)?.get("ratings") as? Map<*, *>)?.get("overall") as? Map<*, *>)?.get("rating") as? Double)
+            val whiteRating = game.white?.ratings?.overall?.rating
                     ?: game.gamedata?.players?.white?.ratings?.overall?.rating
                     ?: game.players?.white?.ratings?.overall?.rating
-            val blackRating = (((game.black as? Map<*, *>)?.get("ratings") as? Map<*, *>)?.get("overall") as? Map<*, *>)?.get("rating") as? Double
+            val blackRating = game.black?.ratings?.overall?.rating
                     ?: game.gamedata?.players?.black?.ratings?.overall?.rating
                     ?: game.players?.black?.ratings?.overall?.rating
             val players = game.json?.players ?: game.gamedata?.players ?: game.players
             val gamedata = game.json ?: game.gamedata
 
-            val whiteDeviation = ((((game.white as? Map<*, *>)?.get("ratings") as? Map<*, *>)?.get("overall") as? Map<*, *>)?.get("deviation") as? Double)
+            val whiteDeviation = game.white?.ratings?.overall?.deviation
                 ?: game.gamedata?.players?.white?.ratings?.overall?.deviation
                 ?: game.players?.white?.ratings?.overall?.deviation
 
-            val blackDeviation = ((((game.black as? Map<*, *>)?.get("ratings") as? Map<*, *>)?.get("overall") as? Map<*, *>)?.get("deviation") as? Double)
+            val blackDeviation = game.black?.ratings?.overall?.deviation
                 ?: game.gamedata?.players?.black?.ratings?.overall?.deviation
                 ?: game.players?.black?.ratings?.overall?.deviation
 
             val whitePlayer = Player(
-                id = (players?.white?.id ?: game.whiteId)!!,
-                username = players?.white?.username ?: (game.white as? Map<*,*>)?.get("username").toString(),
-                country = players?.white?.country ?: game.whitePlayer?.country ?: game.players?.white?.country,
-                icon = players?.white?.icon ?: game.whitePlayer?.icon ?: game.players?.white?.icon,
+                id = (players?.white?.id ?: game.white?.id)!!,
+                username = players?.white?.username ?: game.white?.username.toString(),
+                country = players?.white?.country ?: game.white?.country ?: game.players?.white?.country,
+                icon = players?.white?.icon ?: game.white?.icon ?: game.players?.white?.icon,
                 rating = whiteRating,
                 acceptedStones = players?.white?.accepted_stones,
                 ui_class = players?.white?.ui_class,
@@ -119,10 +119,10 @@ data class Game(
                 deviation = whiteDeviation
             )
             val blackPlayer = Player(
-                id = (players?.black?.id ?: game.blackId)!!,
-                username = players?.black?.username ?: (game.black as? Map<*,*>)?.get("username").toString(),
-                country = players?.black?.country ?: game.blackPlayer?.country ?: game.players?.black?.country,
-                icon = players?.black?.icon ?: game.blackPlayer?.icon ?: game.players?.black?.icon,
+                id = (players?.black?.id ?: game.black?.id)!!,
+                username = players?.black?.username ?: game.black?.username.toString(),
+                country = players?.black?.country ?: game.black?.country ?: game.players?.black?.country,
+                icon = players?.black?.icon ?: game.black?.icon ?: game.players?.black?.icon,
                 rating = blackRating,
                 acceptedStones = players?.black?.accepted_stones,
                 ui_class = players?.black?.ui_class,
@@ -145,10 +145,10 @@ data class Game(
                 hasOutcome && game.white_lost != null -> {
                     game.white_lost
                 }
-                hasOutcome && gamedata?.winner == game.blackId -> {
+                hasOutcome && gamedata?.winner == game.black?.id -> {
                     true
                 }
-                hasOutcome && gamedata?.winner == game.whiteId -> {
+                hasOutcome && gamedata?.winner == game.white?.id -> {
                     false
                 }
                 else -> {
@@ -159,10 +159,10 @@ data class Game(
                 hasOutcome && game.black_lost != null -> {
                     game.black_lost
                 }
-                hasOutcome && gamedata?.winner == game.whiteId -> {
+                hasOutcome && gamedata?.winner == game.white?.id -> {
                     true
                 }
-                hasOutcome && gamedata?.winner == game.blackId -> {
+                hasOutcome && gamedata?.winner == game.black?.id -> {
                     false
                 }
                 else -> {

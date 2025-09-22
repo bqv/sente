@@ -109,4 +109,8 @@
         android:id="@+id/supporterFragment"
         android:name="io.zenandroid.onlinego.ui.screens.supporter.SupporterFragment"
         android:label="SupporterFragment" />
+    <fragment
+        android:id="@+id/watch"
+        android:name="io.zenandroid.onlinego.ui.screens.watch.WatchFragment"
+        android:label="WatchFragment" />
 </navigation>

@@ -162,4 +162,22 @@ object Util {
     fun getRemovedStones(oldPos: Position, newPos: Position): List<Pair<Cell, StoneType>> =
         (newPos.whiteStones - oldPos.whiteStones).map { it to StoneType.WHITE } +
         (newPos.blackStones - oldPos.blackStones).map { it to StoneType.BLACK }
+
+    fun egfToRank(rating: Double?): Int {
+        if (rating == null) {
+            return 0
+        }
+        return (rating / 100).toInt() - 10
+    }
+
+    fun formatRank(rank: Int, deviation: Double?): String {
+        if (deviation != null && deviation > 150) {
+            return "?"
+        }
+        return when {
+            rank > 30 -> "${rank - 30}p"
+            rank > 0 -> "${rank}d"
+            else -> "${1 - rank}k"
+        }
+    }
 }

@@ -84,13 +84,17 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
         binding.bottomNavigation.setupWithNavController(navHostFragment.navController)
+        binding.bottomNavigation.menu.clear()
+        binding.bottomNavigation.inflateMenu(R.menu.bottom_navigation_menu)
         navHostFragment.navController.addOnDestinationChangedListener { _, destination, arguments ->
             binding.apply {
                 bottomNavigation.apply {
                     val shouldBeVisible =
                         destination.id in arrayOf(
                         R.id.myGames,
+                        R.id.watch,
                         R.id.learn,
+                        R.id.stats,
                         R.id.settings
                     ) || (destination.id == R.id.stats && arguments?.isEmpty != false)
                     if(shouldBeVisible) {

@@ -182,12 +182,18 @@ class GameViewModel(
     private val _events = MutableSharedFlow<Event?>()
     val events = _events.asSharedFlow()
 
-    fun initialize(gameId: Long, gameWidth: Int, gameHeight: Int) {
+    fun initialize(gameId: Long, gameWidth: Int, gameHeight: Int, isObserveGame: Boolean = false) {
         val gameFlow = activeGamesRepository.monitorGameFlow(gameId).distinctUntilChanged()
         currentGamePosition = mutableStateOf(Position(gameWidth, gameHeight))
 
         socketService.resendAuth()
         gameConnection = socketService.connectToGame(gameId, true)
+
+        if (!isObserveGame) {
+            viewModelScope.launch {
+                activeGamesRepository.fetchGame(gameId)
+            }
+        }
 
         val messagesFlow = chatRepository.monitorGameChat(gameId)
             .map { messages ->
@@ -463,7 +469,7 @@ class GameViewModel(
                 pushStyle(SpanStyle(fontWeight = FontWeight.Bold))
                 append(loser.username)
                 pop()
-                append(" resigned on move ${game.moves?.size}")
+                append(" resigned")
             }
             game.outcome?.endsWith("points") == true -> buildAnnotatedString {
                 pushStyle(SpanStyle(fontWeight = FontWeight.Bold))

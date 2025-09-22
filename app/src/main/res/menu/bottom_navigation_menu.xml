@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/myGames"
+        android:icon="@drawable/ic_diagram"
+        android:title="@string/games" />
+    <item
+        android:id="@+id/watch"
+        android:icon="@drawable/ic_star"
+        android:title="@string/watch" />
+    <item
+        android:id="@+id/learn"
+        android:icon="@drawable/ic_board"
+        android:title="@string/learn" />
+    <item
+        android:id="@+id/stats"
+        android:icon="@drawable/ic_star"
+        android:title="@string/stats" />
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_person_filled"
+        android:title="@string/profile" />
+</menu>

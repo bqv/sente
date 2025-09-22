@@ -7,8 +7,8 @@ import java.time.Instant
  * Created by alex on 04/11/2017.
  */
 data class OGSGame (
-        var white: Any? = null,
-        var black: Any? = null,
+        var white: OGSPlayer? = null,
+        var black: OGSPlayer? = null,
 
         var id: Long,
 
@@ -57,15 +57,4 @@ data class OGSGame (
             var detail: String? = null
     )
 
-    val blackPlayer: OGSPlayer?
-        get() = black as? OGSPlayer
-
-    val blackId: Long?
-        get() = (black as? Double ?: (black as? Map<*, *>)?.get("id") as? Double)?.toLong()
-
-    val whitePlayer: OGSPlayer?
-        get() = white as? OGSPlayer
-
-    val whiteId: Long?
-        get() = (white as? Double ?: (white as? Map<*, *>)?.get("id") as? Double)?.toLong()
 }

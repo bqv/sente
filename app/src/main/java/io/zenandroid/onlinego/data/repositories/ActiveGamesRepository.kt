@@ -322,6 +322,15 @@ class ActiveGamesRepository(
                 }
             }
 
+    suspend fun fetchGame(id: Long) {
+        try {
+            val game = restService.fetchGame(id).blockingGet()
+            gameDao.insertAllGames(listOf(Game.fromOGSGame(game)))
+        } catch (e: Exception) {
+            onError(e, "fetchGame")
+        }
+    }
+
     fun getGameSingle(id: Long): Single<Game> {
         return gameDao.monitorGame(id).take(1).firstOrError()
     }

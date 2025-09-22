@@ -12,6 +12,8 @@ import io.zenandroid.onlinego.data.db.Database
 import io.zenandroid.onlinego.data.ogs.HTTPConnectionFactory
 import io.zenandroid.onlinego.data.ogs.OGSBooleanJsonAdapter
 import io.zenandroid.onlinego.data.ogs.OGSInstantJsonAdapter
+import io.zenandroid.onlinego.data.model.ogs.OGSPlayer
+import io.zenandroid.onlinego.data.ogs.OGSPlayerJsonAdapter
 import io.zenandroid.onlinego.data.ogs.OGSRestAPI
 import io.zenandroid.onlinego.data.ogs.OGSRestService
 import io.zenandroid.onlinego.data.ogs.OGSWebSocketService
@@ -129,6 +131,7 @@ private val serverConnectionModule = module {
   single {
     Moshi.Builder()
       .add(java.lang.Boolean::class.java, OGSBooleanJsonAdapter())
+      .add(OGSPlayer::class.java, OGSPlayerJsonAdapter())
       .add(Instant::class.java, OGSInstantJsonAdapter().nullSafe())
       .addLast(KotlinJsonAdapterFactory())
       .build()

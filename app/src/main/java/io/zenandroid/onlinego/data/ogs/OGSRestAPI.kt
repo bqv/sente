@@ -55,6 +55,9 @@ interface OGSRestAPI {
     @GET("api/v1/games/{game_id}")
     fun fetchGame(@Path("game_id") game_id: Long): Single<OGSGame>
 
+    @GET("api/v1/games")
+    fun fetchGames(): Single<PagedResult<OGSGame>>
+
     @GET("api/v1/ui/overview")
 //    @GET("api/v1/players/126739/full")
     fun fetchOverview(): Single<Overview>

@@ -43,6 +43,7 @@ class GameFragment : Fragment() {
             gameId = requireArguments().getLong(GAME_ID),
             gameWidth = requireArguments().getInt(GAME_WIDTH),
             gameHeight = requireArguments().getInt(GAME_HEIGHT),
+            isObserveGame = requireArguments().getBoolean("isObserveGame", false)
         )
 
         lifecycleScope.launch {
@@ -95,5 +96,9 @@ class GameFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         analyticsReportScreen("Game")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
     }
 }

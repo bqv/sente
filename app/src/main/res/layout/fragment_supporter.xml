@@ -258,7 +258,7 @@
                 android:id="@+id/text19"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Apps distributed through Google Play are required to use Google Pay, as Google charges 15% of the proceeds. We are not allowed to offer any alternative means of payment in-app."
+                android:text="Yes, see https://github.com/bqv/sente#donations to contribute directly to the project. Google charges 15% of the proceeds of Google Play subscriptions."
                 style="@style/SupporterFAQContent"
                 app:layout_constraintTop_toBottomOf="@id/text18"
                 />
